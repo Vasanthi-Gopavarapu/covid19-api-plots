@@ -11,14 +11,26 @@ function DailyReportChart(props) {
             labels: time,
             datasets: [
                     {
-                        label: 'Covid 19 confirmed cases in India 2020',
-                        data: cases
+                        label: 'Daily',
+                        data: cases,
+                        borderColor: ['rgba(54, 162, 235, 0.2)'],
+                        backgroundColor: ['rgba(54, 162, 235, 0.2)'],
+                        pointBackgroundColor: ['rgba(54, 162, 235, 0.2)'],
+                        pointBorderColor: ['rgba(54, 162, 235, 0.2)']
+                
                     }
                 ]
         }
 
+        const options = {
+            title: {
+                display: true,
+                text: 'Line Chart for Covid 19 confirmed cases in India 2020'
+            }
+        }
+
     return (
-        <Line data={chartData} />
+        <Line data={chartData} options={options}/>
     )
 }
 

@@ -86,23 +86,27 @@ class DatePick extends Component {
 
         return (
             <div>
-                <div>
-                <label>From Date: </label>
-                <DatePicker selected={this.state.fromDate} 
+                
+                <label className="dropdownLabel">From Date: </label>
+                <DatePicker 
+                    className="datepick"
+                    selected={this.state.fromDate} 
                     onChange={date => this.onChangeFromDate(date)}
                     maxDate= {fromMax}
                     minDate={new Date("2020/03/01")}
                     dateFormat="dd/MM/yyyy"/>
-                </div>
-                <div>
-                <label>To Date: </label>
-                <DatePicker selected={this.state.toDate} 
+                
+                
+                <label className="dropdownLabel">To Date: </label>
+                <DatePicker 
+                    className="datepick"
+                    selected={this.state.toDate} 
                     onChange={date => this.onChangeToDate(date)} 
                     maxDate={toMax}
                     minDate={new Date("2020/03/02")}
                     dateFormat="dd/MM/yyyy" />
-                </div> 
-                <div className="chart">
+                 
+                <div className="Chart">
                     {(this.state.fromDate !== null && this.state.toDate !== null) ?
                     <LineChart 
                     fromdate={this.state.fromDate} 

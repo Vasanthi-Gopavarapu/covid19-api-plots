@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import DatePick from './DatePick';
+import '../App.css'
 
 function DropDown() {
 
@@ -7,8 +8,10 @@ function DropDown() {
 
     return (
         <div>
-            <label>Select one: 
-                <select value={timeFrequency} onChange={(e) => setTimeFrequency(e.target.value)} >
+            <label className="dropdownLabel">Select one: 
+                <select className="inputClass" 
+                value={timeFrequency} 
+                onChange={(e) => setTimeFrequency(e.target.value)} >
                     <option value="daily">Daily</option>
                     <option value="monthly">Monthly</option>
                     <option value="quarterly">Quarterly</option>
