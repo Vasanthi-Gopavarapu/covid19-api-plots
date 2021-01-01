@@ -1,10 +1,10 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
+import Moment from 'moment';
 
 
 function DailyReportChart(props) {
-    
-    let time = props.data.map(item => item.date);
+    let time = props.data.map(item => Moment(new Date(item.date)).format('DD-MM'));
     let cases = props.data.map(item => item.cases);
 
     const chartData = {

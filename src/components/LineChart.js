@@ -14,7 +14,7 @@ function LineChart (props) {
         const fromdate = Moment(props.fromdate).format('YYYY-MM-DD');
         const todate = Moment(props.todate).format('YYYY-MM-DD');
         const timeFrequency = props.timeFrequency;
-        console.log(fromdate, todate, timeFrequency);
+        //console.log(fromdate, todate, timeFrequency);
         Axios.get("https://api.covid19api.com/country/india/status/confirmed?from="+fromdate+"T00:00:00Z&to="+todate+"T00:00:00Z")
                     .then(response => {
                         console.log(response.data);   
@@ -27,9 +27,13 @@ function LineChart (props) {
                         }));
 
                     }).catch(error => {
-                        setResponseData(apiData.map(item => {
+                        let filteredData = apiData.filter(item => {
+                            return (new Date(item.Date) >= props.fromdate) && (new Date(item.Date) <= props.todate)
+                        })
+                        console.log(filteredData);
+                        setResponseData(filteredData.map(item => {
                             return {
-                                date: Moment(new Date(item.Date)).format('DD-MM'),
+                                date: item.Date,
                                 cases: item.Cases
                             }
                         }))
@@ -38,7 +42,7 @@ function LineChart (props) {
     }
         useEffect(() => {
             chart();
-        }, []);
+        }, [props.fromdate, props.todate]);
 
         return (
             <div>

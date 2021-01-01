@@ -4,31 +4,28 @@ import { Line } from 'react-chartjs-2';
 
 
 function QuarterlyGraph (props) {
-    console.log(props.data);
-
     let currentMonth = new Date(props.fromDate).getMonth();
+    let lastMonth = new Date(props.toDate).getMonth();
     let numCases = 0;
     let arrLabels = [];
     let arrData = [];
 
     for( let dataObj of props.data) {
-        console.log(dataObj);
-        if(new Date(dataObj["date"]).getMonth() <= (currentMonth + 4)) {
+        if(new Date(dataObj["date"]).getMonth() <= (currentMonth + 3)) {
             numCases += dataObj["cases"];
-        }else if((new Date(dataObj["date"]).getMonth()) > (currentMonth + 4)) {
-            console.log(currentMonth+4)
-            arrLabels.push(Moment.months(currentMonth+4));
+        }else if((new Date(dataObj["date"]).getMonth()) > (currentMonth + 3)) {
+            arrLabels.push(Moment.months(currentMonth + 3));
             arrData.push(numCases);
-            currentMonth+=3;
+            currentMonth += 3;
             numCases = dataObj["cases"];
         }
     }
 
-    arrLabels.push(Moment.months(currentMonth));
+    arrLabels.push(Moment.months(lastMonth));
     arrData.push(numCases);
 
-    console.log(arrLabels);
-    console.log(arrData);
+    // console.log(arrLabels);
+    // console.log(arrData);
 
     const chartData = {
         labels: arrLabels,

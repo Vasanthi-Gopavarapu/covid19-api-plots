@@ -21,7 +21,6 @@ class DatePick extends Component {
             if(date > toDate) {
                 return;
             }
-            //const daysDiff = toDate.getDate() - date.getDate();
             let daysDiff = (Math.abs(toDate - date)) / (1000 * 60 * 60 * 24);
             if(this.props.timeFrequency === 'daily'){
                 if(daysDiff < 1){
@@ -43,14 +42,13 @@ class DatePick extends Component {
 
     onChangeToDate = (date) => {
         const fromDate = this.state.fromDate;
-        console.log(date.getMonth());
         if(fromDate !== null) {
             if(fromDate > date) {
                 return;
             }
-            //const daysDiff = date.getDate() - fromDate.getDate();
+            
             let daysDiff = (Math.abs(date - fromDate)) / (1000 * 60 * 60 * 24);
-            console.log(daysDiff);
+            
             if(this.props.timeFrequency === 'daily'){
                 if(daysDiff < 1){
                    return;
