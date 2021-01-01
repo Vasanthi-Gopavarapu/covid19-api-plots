@@ -18,19 +18,22 @@ class DatePick extends Component {
     onChangeFromDate = (date) => {
         const toDate = this.state.toDate;
         if(toDate !== null){
+            if(date > toDate) {
+                return;
+            }
             //const daysDiff = toDate.getDate() - date.getDate();
             let daysDiff = (Math.abs(toDate - date)) / (1000 * 60 * 60 * 24);
             if(this.props.timeFrequency === 'daily'){
                 if(daysDiff < 1){
-                    date = null;
+                    return;
                 }
             }else if(this.props.timeFrequency === 'monthly'){
                 if(daysDiff < 30) {
-                    date = null
+                    return;
                 }
             }else {
                 if(daysDiff < 90) {
-                    date = null
+                    return;
                 }
             }
         }
@@ -40,21 +43,25 @@ class DatePick extends Component {
 
     onChangeToDate = (date) => {
         const fromDate = this.state.fromDate;
+        console.log(date.getMonth());
         if(fromDate !== null) {
+            if(fromDate > date) {
+                return;
+            }
             //const daysDiff = date.getDate() - fromDate.getDate();
             let daysDiff = (Math.abs(date - fromDate)) / (1000 * 60 * 60 * 24);
             console.log(daysDiff);
             if(this.props.timeFrequency === 'daily'){
                 if(daysDiff < 1){
-                    date = null;
+                   return;
                 }
             }else if(this.props.timeFrequency === 'monthly'){
                 if(daysDiff < 30) {
-                    date = null;
+                   return;
                 }
             }else {
                 if(daysDiff < 90) {
-                    date = null
+                    return;
                 }
             }
         }
@@ -84,6 +91,7 @@ class DatePick extends Component {
                 <DatePicker selected={this.state.fromDate} 
                     onChange={date => this.onChangeFromDate(date)}
                     maxDate= {fromMax}
+                    minDate={new Date("2020/03/01")}
                     dateFormat="dd/MM/yyyy"/>
                 </div>
                 <div>
@@ -91,10 +99,16 @@ class DatePick extends Component {
                 <DatePicker selected={this.state.toDate} 
                     onChange={date => this.onChangeToDate(date)} 
                     maxDate={toMax}
+                    minDate={new Date("2020/03/02")}
                     dateFormat="dd/MM/yyyy" />
                 </div> 
                 <div className="chart">
-                    <LineChart />
+                    {(this.state.fromDate !== null && this.state.toDate !== null) ?
+                    <LineChart 
+                    fromdate={this.state.fromDate} 
+                    todate={this.state.toDate}
+                    timeFrequency={timeFrequency}/>: null
+                }
                 </div>
                  
             </div>

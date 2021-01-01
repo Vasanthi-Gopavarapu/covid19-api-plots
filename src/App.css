@@ -1,10 +1,12 @@
 .App {
-  display: flex;
-  justify-content: center;
+  display: inline-block;
+  margin: 20px;
+  padding: 0px 10px;
 }
 
 .chart {
-  width: 720px;
+  width: 880px;
+  margin: 20px;
 }
 
 
