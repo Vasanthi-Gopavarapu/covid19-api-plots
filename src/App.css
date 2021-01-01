@@ -21,10 +21,16 @@
   margin: 20px;
 }
 
-.datepick {
+.fromdatepick {
   width: 200px;
   height: 22px;
   margin: 20px;
+}
+
+.todatepick {
+  width: 200px;
+  height: 22px;
+  margin: 20px 35px;
 }
 
 

@@ -87,17 +87,17 @@ class DatePick extends Component {
                 
                 <label className="dropdownLabel">From Date: </label>
                 <DatePicker 
-                    className="datepick"
+                    className="fromdatepick"
                     selected={this.state.fromDate} 
                     onChange={date => this.onChangeFromDate(date)}
                     maxDate= {fromMax}
                     minDate={new Date("2020/03/01")}
                     dateFormat="dd/MM/yyyy"/>
                 
-                
+                <br/>
                 <label className="dropdownLabel">To Date: </label>
                 <DatePicker 
-                    className="datepick"
+                    className="todatepick"
                     selected={this.state.toDate} 
                     onChange={date => this.onChangeToDate(date)} 
                     maxDate={toMax}
