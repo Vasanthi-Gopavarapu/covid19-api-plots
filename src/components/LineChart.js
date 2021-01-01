@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import DailyReportChart from './DailyReportChart';
+import MonthlyGraph from './MonthlyGraph';
+import QuarterlyGraph from './QuarterlyGraph';
+import apiData from '../data';
 import Axios from 'axios';
 import Moment from 'moment';
 
@@ -16,16 +19,20 @@ function LineChart (props) {
                     .then(response => {
                         console.log(response.data);   
                         
-                        let confirmedData = response.data.map(item => {
+                        setResponseData(response.data.map(item => {
                             return {
                                 date: Moment(new Date(item.Date)).format('DD-MM'),
                                 cases: item.Cases
                             }
-                        });
-
-                        setResponseData(confirmedData);
+                        }));
 
                     }).catch(error => {
+                        setResponseData(apiData.map(item => {
+                            return {
+                                date: Moment(new Date(item.Date)).format('DD-MM'),
+                                cases: item.Cases
+                            }
+                        }))
                         console.log(error);
                     });
     }
@@ -37,6 +44,14 @@ function LineChart (props) {
             <div>
                 {props.timeFrequency === 'daily' ? 
                 <DailyReportChart data={responseData} 
+                fromDate={props.fromdate}
+                toDate={props.todate} /> : null}
+                {props.timeFrequency === 'monthly' ? 
+                <MonthlyGraph data={responseData} 
+                fromDate={props.fromdate}
+                toDate={props.todate} /> : null}
+                {props.timeFrequency === 'quarterly' ? 
+                <QuarterlyGraph data={responseData} 
                 fromDate={props.fromdate}
                 toDate={props.todate} /> : null}
             </div>
